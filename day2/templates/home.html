@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block title%}
+Home page
+{%endblock%}
+{%block content%}
+
+
+
+<div class="container mt-3">
+    <h2>Contextual Classes</h2>
+    <p>Contextual classes can be used to color the table, table rows or table cells. The classes that can be used are: .table-primary, .table-success, .table-info, .table-warning, .table-danger, .table-active, .table-secondary, .table-light and .table-dark:</p>
+    <table class="table">
+      <thead>
+        <tr>
+         <th>id</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        {%for student in  students%}
+        <tr class="table-warning">
+        <td> {{student.id}}</td>
+          <td>{{student.name}}4</td>
+          <td>{{student.address}}</td>
+          <td>{{student.email}}</td>
+          <td>
+           <a href="{% url 'delete' student.id %}"
+           class="btn btn-danger">delete</a>
+            </td>
+
+          <td>
+       
+                <a href="{% url 'update' student.id %}"
+                class="btn btn-warning">edit</a>
+                
+     
+          </td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+  </div>
+
+
+
+{%endblock%}
+
+
+
+
+
+
+
+
+
