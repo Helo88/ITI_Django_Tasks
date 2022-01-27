@@ -8,8 +8,7 @@ Home page
 
 
 <div class="container mt-3">
-    <h2>Contextual Classes</h2>
-    <p>Contextual classes can be used to color the table, table rows or table cells. The classes that can be used are: .table-primary, .table-success, .table-info, .table-warning, .table-danger, .table-active, .table-secondary, .table-light and .table-dark:</p>
+    <h1>Students Affairs</h1>
     <table class="table">
       <thead>
         <tr>
@@ -24,7 +23,7 @@ Home page
         {%for student in  students%}
         <tr class="table-warning">
         <td> {{student.id}}</td>
-          <td>{{student.name}}4</td>
+          <td>{{student.name}}</td>
           <td>{{student.address}}</td>
           <td>{{student.email}}</td>
           <td>
@@ -35,9 +34,7 @@ Home page
           <td>
        
                 <a href="{% url 'update' student.id %}"
-                class="btn btn-warning">edit</a>
-                
-     
+                class="btn btn-primary">edit</a>
           </td>
         </tr>
         {%endfor%}

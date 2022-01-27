@@ -10,7 +10,7 @@ update form  page
     <div class="d-flex flex-row align-items-center mb-4">
       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
       <div class="form-outline flex-fill mb-0">
-        <input required name="name" type="text" id="form3Example1c" class="form-control" />
+        <input required name="name" type="text" id="form3Example1c" class="form-control" value={{student.name}} />
         <label class="form-label" for="form3Example1c">Your Name</label>
       </div>
     </div>
@@ -18,7 +18,7 @@ update form  page
     <div class="d-flex flex-row align-items-center mb-4">
         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
         <div class="form-outline flex-fill mb-0">
-          <input required type="text" name="address" id="form3Example1c" class="form-control" />
+          <input required type="text" name="address" id="form3Example1c" class="form-control" value={{student.address}}/>
           <label class="form-label" for="form3Example1c">Your Address</label>
         </div>
       </div>
@@ -26,18 +26,11 @@ update form  page
     <div class="d-flex flex-row align-items-center mb-4">
       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
       <div  class="form-outline flex-fill mb-0">
-        <input required type="email" name="email" id="form3Example3c" class="form-control" />
+        <input required type="email" name="email" id="form3Example3c" class="form-control" value={{student.email}} />
         <label class="form-label" for="form3Example3c">Your Email</label>
       </div>
     </div>
 
-    <div class="d-flex flex-row align-items-center mb-4">
-      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-      <div class="form-outline flex-fill mb-0">
-        <input required type="password" name="password" id="form3Example4c" class="form-control" />
-        <label class="form-label" for="form3Example4c">Password</label>
-      </div>
-    </div>
 
 
 

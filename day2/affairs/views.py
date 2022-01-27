@@ -3,10 +3,16 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from .models import Student, Students
 # Create your views here.
-def home (request):
-         print("req is ",request)
-         allStudents=Students.objects.all()
-         return  render(request,'home.html',{'students':allStudents})
+def home (request,students={}):
+         print("req is ",students)
+         #students=Students.objects.all()
+         search=request.GET.get('search',None)
+        #  print("sea",search)
+         if search :
+             students=Students.objects.all().filter(name=search)
+         else :
+             students=Students.objects.all()
+         return  render(request,'home.html',{'students':students})
      
 
 def login (request):
@@ -54,14 +60,22 @@ def delete (request,student_id):
     return redirect ('/home')
 
 def update (request,student_id):
+    student=Students.objects.get(pk=student_id)
     if(request.method=='GET'):
         #student=Students.objects.get(pk=student_id)
-        return render (request,'form.html')
+        return render (request,'form.html',{'student':student})
     else :
-        student=Students.objects.get(pk=student_id)
+        
         print(request.POST['name'])
         student.name=request.POST['name']
         student.email=request.POST['email']
         student.address=request.POST['address']
         student.save()
         return redirect('/home')
+
+
+def search (req):
+    search=req.GET.get('search',None)
+    print("search  running is",search)
+    students=Students.objects.all().filter(name=search)
+    return  redirect('/home',{'students':students})
