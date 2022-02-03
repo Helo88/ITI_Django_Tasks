@@ -1,7 +1,14 @@
+from ast import Sub
 import json
+from multiprocessing import Event
+from re import sub
+from unicodedata import name
+from django import forms
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect,HttpResponse
-from .models import Student, Students
+from .models import  Students,Intake
+from .forms import Student_Form,Intake_Form 
+
 # Create your views here.
 def home (request,students={}):
          print("req is ",students)
@@ -24,9 +31,11 @@ def login (request):
         #check for user and passs
         email=request.POST['email']
         password=request.POST['password']
+        print('login data',email," -- ",password)
         #if correct
         allStudents=Students.objects.all()
         students= Students.objects.filter(email=email,password=password)
+        
         if(len(students)>0):
             print(len(allStudents))
             return redirect('/home',{'students':allStudents})
@@ -49,7 +58,7 @@ def register (req):
             print(req.POST)
             #cretae myuser
             Students.objects.create(name=req.POST['name'],address=req.POST['address'],
-            email=req.POST['email'],password=req.POST['password'])
+            email=req.POST['email'],password=req.POST['password'],confirm_password=req.POST.get('confirm_password'))
             students=Students.objects.all()
             return redirect('/login')
 
@@ -75,7 +84,52 @@ def update (request,student_id):
 
 
 def search (req):
-    search=req.GET.get('search',None)
-    print("search  running is",search)
-    students=Students.objects.all().filter(name=search)
-    return  redirect('/home',{'students':students})
+    if req.method =="POST":
+           searched=req.POST['searched']
+           print("search  running is",searched)
+           students=Students.objects.filter(name=searched)
+           return  render(req,'searchResults.html',{'searched':searched,'students':students})
+    else :
+        pass
+ 
+
+def add_student(req):
+    submitted=False
+    if req.method=="GET" :
+        # new form
+        form=Student_Form
+        if 'submitted' in req.GET :
+            # from the 2nd second request
+            submitted=True
+        return render (req,'studentModelForm.html',{'form':form,'submitted':submitted})
+    else :
+        #req is post data already in
+        form=Student_Form(req.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_student?submitted=True')
+        else :
+           return render (req,'studentModelForm.html',{'form':form,'submitted':submitted})
+        
+        
+        
+def add_intake(req):
+    submitted=False
+    if req.method=="GET" :
+        # new form
+        form=Intake_Form
+        if 'submitted' in req.GET :
+            # from the 2nd second request
+            submitted=True
+        return render (req,'IntakeFormForm.html',{'form':form,'submitted':submitted})
+    else :
+        #req is post data already in
+        form=Intake_Form(req.POST)
+        if form.is_valid():
+            data=form.cleaned_data
+            Intake.objects.create(name=data['name'],
+             number=data['number'],start_date=data['start_date'],end_date=data['end_date'],manager=req.user)
+            return HttpResponseRedirect('/add_intake?submitted=True')
+        else :
+            # to view errors
+           return render (req,'IntakeFormForm.html',{'form':form,'submitted':submitted})

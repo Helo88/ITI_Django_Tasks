@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block title%}
+search results 
+{%endblock%}
+{%block content%}
+
+
+{% if searched   %}
+
+<div class="container mt-3">
+    <h1>Students Affairs</h1>
+    <table class="table">
+      <thead>
+        <tr>
+         <th>id</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        {%for student in  students%}
+        <tr class="table-warning">
+        <td> {{student.id}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.address}}</td>
+          <td>{{student.email}}</td>
+          <td>
+           <a href="{% url 'delete' student.id %}"
+           class="btn btn-danger">delete</a>
+            </td>
+
+          <td>
+       
+                <a href="{% url 'update' student.id %}"
+                class="btn btn-primary">edit</a>
+          </td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+
+
+
+<h1 class="text-center">You forget to search for something</h1>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block title%}
+TEST MODEL FORM
+{%endblock%}
+{%block content%}
+
+{%  if submitted %}
+<p>This form is submitted successfully</p>
+{% else %}
+<form method="post" class="container"action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+ 
+    <input type="submit" value="Submit" class="btn btn-primary btn-lg">
+
+</form>
+
+{% endif %}
+
+{%endblock%} 
