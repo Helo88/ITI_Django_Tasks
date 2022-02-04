@@ -33,9 +33,18 @@
         <li class="nav-item">
           <a class="nav-link" href={% url 'add-intake' %} >Add New Intake</a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'log-out' %} >logout<sub><small>by Django auth</small></sub></a>
+        </li>
+        {% else %}
         <li class="nav-item">
           <a class="nav-link" href={% url 'log-in' %} >login<sub><small>by Django auth</small></sub></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'register-Auth' %} >register<sub><small>by Django auth</small></sub></a>
+        </li>
+        {% endif %}
       </ul>
       <form class="d-flex" method="POST" action="{% url 'search_results' %}">
         {% csrf_token %}
