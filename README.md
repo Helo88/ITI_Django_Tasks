@@ -1,2 +1,2 @@
-# djangoTasks
+# DjangoTasks
 ITI _DJANGO_COURSE_ALL_TASKS
