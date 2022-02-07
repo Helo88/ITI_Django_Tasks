@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block title%}
+TEST FORM FORM
+{%endblock%}
+{%block content%}
+<p class="mt-5 text-primary text-center">Intakes generic Views</p>
+<u style="list-style:none">
+{% for track in object_list %}
+<li>
+    <a style="text-decoration:none" href="{ % url 'tracks' id %}"> {{track.name}} {{track.number}}</a>
+</li>
+{% endfor %} 
+</ul>
+{%endblock%} 

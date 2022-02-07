@@ -16,13 +16,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path,include
-from affairs.views import home ,login,register,delete,update,search,add_student,add_intake
+from affairs.views import home ,login,register,delete,update,search,add_student,add_intake,IntakeList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
      path('home/', home),
      path('login/', login),
      path('register/', register),
+     path('intakes',IntakeList.as_view(),name='intakes'),
      path('add_student/',add_student,name='add-student'),
      path('add_intake/',add_intake,name='add-intake'),
      path('search/', search ,name='search_results'),

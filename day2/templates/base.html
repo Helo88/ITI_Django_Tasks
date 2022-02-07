@@ -44,6 +44,9 @@
         <li class="nav-item">
           <a class="nav-link" href={% url 'register-Auth' %} >register<sub><small>by Django auth</small></sub></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'intakes' %} >intakes<sub><small>by generic view</small></sub></a>
+        </li>
         {% endif %}
       </ul>
       <form class="d-flex" method="POST" action="{% url 'search_results' %}">

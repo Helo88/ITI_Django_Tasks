@@ -1,14 +1,21 @@
 from ast import Sub
 import json
 from multiprocessing import Event
-from re import sub
+from re import sub, template
 from unicodedata import name
 from django import forms
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from .models import  Students,Intake
 from .forms import Student_Form,Intake_Form 
+from django.views.generic import ListView
 
+class IntakeList(ListView):
+    template_name="tracks.html"
+    model=Intake
+    def get_query(self):
+        return Intake.objects.all()
+    
 # Create your views here.
 def home (request,students={}):
          print("req is ",students)

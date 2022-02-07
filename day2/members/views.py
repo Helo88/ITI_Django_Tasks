@@ -10,6 +10,7 @@ def log_in (request):
         password = request.POST.get('password')
         print(username ," --- ",password)
         user = authenticate(request, username=username, password=password)
+        request.session['username']=username
         if user is not None:
             print("found")
             login(request, user)
@@ -25,6 +26,7 @@ def log_in (request):
 
 def log_out (request):
     messages.success(request,"you logged out successfully")
+    request.session['username']=None
     logout(request)
     return redirect ('/home')
 
