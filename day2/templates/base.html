@@ -30,10 +30,11 @@
         <li class="nav-item">
           <a class="nav-link" href={% url 'add-student' %} >Add New Student</a>
         </li>
+   
+        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href={% url 'add-intake' %} >Add New Intake</a>
         </li>
-        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href={% url 'log-out' %} >logout<sub><small>by Django auth</small></sub></a>
         </li>

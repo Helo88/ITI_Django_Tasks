@@ -16,21 +16,25 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path,include
-from affairs.views import home ,login,register,delete,update,search,add_student,add_intake,IntakeList
+from affairs.views import home ,login,register,delete,update,search,add_student,IntakeList
+from rest_framework import routers
+from apis.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+     path('admin/', admin.site.urls),
+     path('',include("members.urls")),
      path('home/', home),
      path('login/', login),
      path('register/', register),
      path('intakes',IntakeList.as_view(),name='intakes'),
      path('add_student/',add_student,name='add-student'),
-     path('add_intake/',add_intake,name='add-intake'),
      path('search/', search ,name='search_results'),
      path('delete/<student_id>', delete,name='delete'),
      path('update/<student_id>', update,name='update'),
      path('members/',include('django.contrib.auth.urls')),
      path('members/',include('members.urls')),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
      
     
 ]

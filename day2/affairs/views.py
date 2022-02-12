@@ -120,23 +120,3 @@ def add_student(req):
         
         
         
-def add_intake(req):
-    submitted=False
-    if req.method=="GET" :
-        # new form
-        form=Intake_Form
-        if 'submitted' in req.GET :
-            # from the 2nd second request
-            submitted=True
-        return render (req,'IntakeFormForm.html',{'form':form,'submitted':submitted})
-    else :
-        #req is post data already in
-        form=Intake_Form(req.POST)
-        if form.is_valid():
-            data=form.cleaned_data
-            Intake.objects.create(name=data['name'],
-             number=data['number'],start_date=data['start_date'],end_date=data['end_date'],manager=req.user)
-            return HttpResponseRedirect('/add_intake?submitted=True')
-        else :
-            # to view errors
-           return render (req,'IntakeFormForm.html',{'form':form,'submitted':submitted})
